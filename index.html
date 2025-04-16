@@ -43,6 +43,7 @@
       font-weight: bold;
       position: relative;
       z-index: 1;
+      transition: 0.3s ease;
     }
 
     #nao {
@@ -58,6 +59,13 @@
       color: white;
       font-size: 14px;
       line-height: 1.6;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #mensagemFinal.show {
+      display: block;
+      opacity: 1;
     }
   </style>
 </head>
@@ -81,7 +89,7 @@
     const pergunta = document.getElementById("pergunta");
     const mensagemFinal = document.getElementById("mensagemFinal");
 
-    // Botão "Não" fugindo do mouse
+    // Botão "Não" fugindo
     document.querySelector(".heart").addEventListener("mousemove", (e) => {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
@@ -105,9 +113,8 @@
       btnSim.style.display = "none";
       btnNao.style.display = "none";
       pergunta.style.display = "none";
-      mensagemFinal.style.display = "block";
+      mensagemFinal.classList.add("show");
     });
   </script>
 </body>
 </html>
-
