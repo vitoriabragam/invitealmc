@@ -16,52 +16,97 @@
 
     .heart {
       background-color: #ff5e78;
-      width: 300px;
-      height: 300px;
-      position: relative;
-      clip-path: path("M150 270 C0 170, 0 70, 150 70 C300 70, 300 170, 150 270");
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
+      position: relative;
+      padding: 20px;
+      text-align: center;
     }
 
-    h2 {
+    h2, p {
       color: white;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     button {
       background-color: #00e5ff;
       border: none;
       padding: 10px 20px;
-      margin: 5px;
+      margin: 10px;
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
       position: relative;
+      z-index: 1;
     }
 
     #nao {
       position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.3s ease;
+    }
+
+    #mensagemFinal {
+      display: none;
+      color: white;
+      font-size: 14px;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
   <div class="heart">
-    <h2>Quer sair comigo?</h2>
+    <h2 id="pergunta">Quer sair comigo?</h2>
     <button id="sim">Sim</button>
     <button id="nao">Não</button>
+
+    <div id="mensagemFinal">
+      <p><strong>ok, então tá marcado, dia 27,</strong></p>
+      <p><strong>sua missão:</strong> se arrumar</p>
+      <p><strong>destino:</strong> decidimos no caminho</p>
+      <p><em>ah, nem adianta vir com a desculpa da caipirinha de 92 reais</em> 🍹</p>
+    </div>
   </div>
 
   <script>
     const btnNao = document.getElementById("nao");
+    const btnSim = document.getElementById("sim");
+    const pergunta = document.getElementById("pergunta");
+    const mensagemFinal = document.getElementById("mensagemFinal");
 
-    btnNao.addEventListener("mouseover", () => {
-      const i = Math.floor(Math.random() * 200);
-      const j = Math.floor(Math.random() * 200);
-      btnNao.style.top = i + "px";
-      btnNao.style.left = j + "px";
+    // Botão "Não" fugindo do mouse
+    document.querySelector(".heart").addEventListener("mousemove", (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      const rect = btnNao.getBoundingClientRect();
+      const btnX = rect.left + rect.width / 2;
+      const btnY = rect.top + rect.height / 2;
+
+      const distancia = Math.hypot(mouseX - btnX, mouseY - btnY);
+
+      if (distancia < 100) {
+        const offsetX = (Math.random() - 0.5) * 200;
+        const offsetY = (Math.random() - 0.5) * 200;
+        btnNao.style.top = `${Math.min(Math.max(20, btnNao.offsetTop + offsetY), 250)}px`;
+        btnNao.style.left = `${Math.min(Math.max(20, btnNao.offsetLeft + offsetX), 250)}px`;
+      }
     });
 
-    document.getElementById("sim").addEventListener("click", () => {
+    // Botão "Sim"
+    btnSim.addEventListener("click", () => {
+      btnSim.style.display = "none";
+      btnNao.style.display = "none";
+      pergunta.style.display = "none";
+      mensagemFinal.style.display = "block";
+    });
+  </script>
+</body>
+</html>
