@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Convite Irrecusável</title>
+  <style>
+    body {
+      background-color: #fddde6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .heart {
+      background-color: #ff5e78;
+      width: 300px;
+      height: 300px;
+      position: relative;
+      clip-path: path("M150 270 C0 170, 0 70, 150 70 C300 70, 300 170, 150 270");
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #00e5ff;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      position: relative;
+    }
+
+    #nao {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div class="heart">
+    <h2>Quer sair comigo?</h2>
+    <button id="sim">Sim</button>
+    <button id="nao">Não</button>
+  </div>
+
+  <script>
+    const btnNao = document.getElementById("nao");
+
+    btnNao.addEventListener("mouseover", () => {
+      const i = Math.floor(Math.random() * 200);
+      const j = Math.floor(Math.random() * 200);
+      btnNao.style.top = i + "px";
+      btnNao.style.left = j + "px";
+    });
+
+    document.getElementById("sim").addEventListener("click", () => {
+      alert("Sabia que você diria sim!");
+    });
+  </script>
+</body>
+</html>
